@@ -1,0 +1,27 @@
+1. Adicionar dependencias no gradle
+	implementation 'com.parse:parse-android:1.16.3'
+
+	repositories {
+    	mavenCentral()
+	}
+
+2. Adicionar as autorizações no Manifesto
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.INTERNET"/>
+
+3. Adicionar tudo que for necessário no strings
+
+4. Adicionar , no manifesto, as diretrizes de login (Id app, id cliente e URL do server)
+  <meta-data
+      android:name="com.parse.SERVER_URL"
+      android:value="@string/back4app_server_url" />
+  <meta-data
+      android:name="com.parse.APPLICATION_ID"
+      android:value="@string/back4app_app_id" />
+  <meta-data
+      android:name="com.parse.CLIENT_KEY"
+      android:value="@string/back4app_client_key" />
+
+5. No MainActivity
+ Parse.initialize(this);
+ ParseInstallation.getCurrentInstallation().saveInBackground();
