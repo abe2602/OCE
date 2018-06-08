@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Compartilhar.Leito_do_rio.LeitoAlturaAgua"
+    tools:context=".Compartilhar.Enchente_nas_ruas.AlturaRuaActivity"
     android:background="@drawable/fundo_login_cinza">
 
     <RelativeLayout
@@ -54,10 +54,12 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_altura_intransitavel"
+        android:onClick="sendRelatoIntransitavel"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
@@ -65,16 +67,21 @@
         android:id="@+id/button_transitavel"
         android:layout_width="319dp"
         android:layout_height="96dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_altura_transitavel"
+        android:onClick="sendRelatoTransitavel"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_intransitavel" />
+        app:layout_constraintTop_toBottomOf="@+id/button_intransitavel"
+        app:layout_constraintVertical_bias="0.261" />
     <android.support.constraint.ConstraintLayout
         android:id="@+id/navegationMenu"
         android:layout_width="435dp"

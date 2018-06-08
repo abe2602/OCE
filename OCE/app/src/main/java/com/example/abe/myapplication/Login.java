@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
 
         /*Parser para realizar o login*/
         Parse.initialize(this);
+
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         user = (EditText) findViewById(R.id.editTextLogin);
@@ -70,7 +72,7 @@ public class Login extends AppCompatActivity {
             public void done(ParseUser parseUser, ParseException e) {
                 if (parseUser != null) {
                     dlg.dismiss();
-                    alertDisplayer("Sucessful Login","Welcome back " + user.getText().toString() + "!");
+                    alertDisplayer("Login efetuado com sucesso!","Bem-vindo(a) " + user.getText().toString() + "!");
 
                 } else {
                     dlg.dismiss();

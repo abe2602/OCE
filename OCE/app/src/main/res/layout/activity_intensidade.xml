@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo_login_cinza"
-    tools:context=".Compartilhar.MainCompartilhamento">
+    tools:context=".Compartilhar.Intensidade_chuva.IntensidadeActivity">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -47,10 +47,10 @@
     </RelativeLayout>
 
     <Button
-        android:id="@+id/button_chuva_forteCventos"
+        android:id="@+id/button_chuva_forte_c_ventos"
         android:layout_width="309dp"
         android:layout_height="65dp"
-        android:layout_marginBottom="500dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -58,16 +58,18 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_chuva_forteCventos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="forteComVentos"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.025" />
 
     <Button
-        android:id="@+id/button_chuva_forteSventos"
+        android:id="@+id/button_chuva_forte_s_ventos"
         android:layout_width="309dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="424dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -75,35 +77,37 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_chuva_forteSventos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="forteSemVentos"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_chuva_forteCventos"
-        app:layout_constraintVertical_bias="0.733" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.209" />
 
     <Button
-        android:id="@+id/button_chuva_moderadaCventos"
+        android:id="@+id/button_chuva_moderada_c_ventos"
         android:layout_width="307dp"
         android:layout_height="63dp"
-        android:layout_marginBottom="340dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="176dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_chuva_moderadaCventos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="moderadaComVentos"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_chuva_forteSventos"
-        app:layout_constraintVertical_bias="0.777" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.014" />
 
     <Button
-        android:id="@+id/button_chuva_moderadaSventos"
+        android:id="@+id/button_chuva_moderada_s_ventos"
         android:layout_width="309dp"
         android:layout_height="67dp"
-        android:layout_marginBottom="252dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -111,17 +115,18 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_chuva_moderadaSventos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="moderadaSemVentos"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_chuva_moderadaCventos"
-        app:layout_constraintVertical_bias="0.727" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.578" />
 
     <Button
-        android:id="@+id/button_chuva_fracaCventos"
+        android:id="@+id/button_chuva_fraca_c_ventos"
         android:layout_width="309dp"
-        android:layout_height="64dp"
-        android:layout_marginBottom="168dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -129,17 +134,18 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_chuva_fracaCventos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="fracaComVentos"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_chuva_moderadaSventos"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.774" />
 
     <Button
-        android:id="@+id/button_chuva_fracaSventos"
+        android:id="@+id/button_chuva_fraca_s_ventos"
         android:layout_width="311dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="88dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -147,11 +153,12 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_chuva_fracaSventos"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="fracaSemVentos"
+        app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_chuva_fracaCventos"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.965" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/navegationMenu"

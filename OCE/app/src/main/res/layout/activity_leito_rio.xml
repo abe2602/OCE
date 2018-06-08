@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Compartilhar.MainCompartilhamento"
+    tools:context=".Compartilhar.Leito_do_rio.LeitoRioActivity"
     android:background="@drawable/fundo_login_cinza"
     >
 
@@ -51,22 +51,24 @@
         android:id="@+id/button_altura_agua"
         android:layout_width="319dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="448dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="124dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_altura_ruas"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="alturaAguaLeitoClick"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout" />
 
     <Button
         android:id="@+id/button_faixa_cores"
         android:layout_width="319dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginBottom="108dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -74,17 +76,19 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_altura_ruas"
+        android:onClick="faixaDeCoresClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_altura_boneco"
+        app:layout_constraintTop_toTopOf="@+id/relativeLayout"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_altura_boneco"
         android:layout_width="319dp"
         android:layout_height="79dp"
-        android:layout_marginBottom="276dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -92,11 +96,12 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_altura_ruas"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="alturaBonecoClick"
+        app:layout_constraintBottom_toTopOf="@+id/button_faixa_cores"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_altura_agua"
-        app:layout_constraintVertical_bias="0.835" />
+        app:layout_constraintTop_toBottomOf="@+id/button_altura_agua" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/navegationMenu"

@@ -56,11 +56,15 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_faixa_vermelho"
+        android:onClick="OnClickVermelho"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button_faixa_amarelo"
@@ -74,10 +78,11 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_faixa_amarelo"
+        android:onClick="OnClickAmarelo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_altura_boneco"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -92,11 +97,12 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/fundo_login"
         android:text="@string/text_button_faixa_verde"
+        android:onClick="OnClickVerde"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_altura_agua"
-        app:layout_constraintVertical_bias="0.835" />
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.99" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/navegationMenu"

@@ -63,4 +63,13 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="hello_world">Hello world!</string>
+    <string name="capture_button">Capture Image From Camera</string>
+    <string name="desc">capture image place holder</string>
+
+    <string name="hint_photo">Foto tirada</string>
+    <string name="hint_text_photo">Escreva um comentário</string>
+
+    <string name="text_save">Salvar</string>
+    <string name="text_cancel">Cancelar</string>
 </resources>
