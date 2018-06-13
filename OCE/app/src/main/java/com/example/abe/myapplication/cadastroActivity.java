@@ -49,7 +49,7 @@ public class cadastroActivity extends AppCompatActivity {
         /*
         * Verifica se há campos em branco
         * */
-        final Button signup_button = findViewById(R.id.signup_button);
+        final Button signup_button = findViewById(R.id.button_save2);
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

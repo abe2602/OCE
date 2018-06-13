@@ -70,6 +70,14 @@
     <string name="hint_photo">Foto tirada</string>
     <string name="hint_text_photo">Escreva um comentário</string>
 
+    <string name="text_name">Nome</string>
+    <string name="text_password_again">Repita a senha</string>
+
+    <string name="text_email">Email</string>
+
     <string name="text_save">Salvar</string>
     <string name="text_cancel">Cancelar</string>
+
+    <string name="text_hint_google">Botão para entrar com uma conta google</string>
+    <string name="text_hint_facebook">Botão para entrar com uma conta facebook</string>
 </resources>
