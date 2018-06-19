@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.abe.myapplication">
-
-    <uses-feature
-        android:name="android.hardware.camera.any"
-        android:required="true" />
-    <uses-feature
-        android:name="android.hardware.camera.autofocus"
-        android:required="false" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    package="com.example.abe.mobiletrabalho">
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
 
     <application
         android:allowBackup="true"
@@ -18,36 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login">
+
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Compartilhar.MainCompartilhamento" />
-        <activity android:name=".Perfil.MainPerfil" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Compartilhar.AlturaRuasActivity" />
-        <activity android:name=".Compartilhar.Enchente_nas_ruas.AlturaRuaActivity" />
-        <activity android:name=".Compartilhar.Leito_do_rio.LeitoRioActivity" />
-        <activity android:name=".Compartilhar.Foto.FotoAcitivity" />
-        <activity android:name=".Compartilhar.Intensidade_chuva.IntensidadeActivity" />
-        <activity android:name=".Compartilhar.Leito_do_rio.LeitoAlturaAgua" />
-        <activity android:name=".Compartilhar.Leito_do_rio.LeitoFaixaCores" />
-        <activity android:name=".Compartilhar.Leito_do_rio.LeitoAlturaBoneco" />
-
-        <meta-data
-            android:name="com.parse.SERVER_URL"
-            android:value="@string/back4app_server_url" />
-        <meta-data
-            android:name="com.parse.APPLICATION_ID"
-            android:value="@string/back4app_app_id" />
-        <meta-data
-            android:name="com.parse.CLIENT_KEY"
-            android:value="@string/back4app_client_key" />
-
-        <activity android:name=".cadastroActivity"></activity>
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".camera.CameraActivity" />
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".map.MapActivity" />
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".danger.DangerActivity" />
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".mic.MicActivity" />
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".vibra.VibraActivity" />
+        <activity android:configChanges="orientation|screenSize|keyboardHidden" android:name=".emotions.EmotionsActivity"/>
     </application>
-
 </manifest>
