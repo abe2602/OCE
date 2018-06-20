@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fundo_login_cinza"
-    tools:context=".compartilhar.leito_do_rio.LeitoFaixaCores">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="422dp"
+        android:layout_width="match_parent"
         android:layout_height="73dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:background="@drawable/fundo_login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp">
 
         <TextView
             android:id="@+id/textView12"
@@ -47,76 +38,12 @@
             app:layout_constraintTop_toTopOf="parent" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/button_faixa_vermelho"
-        android:layout_width="319dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="448dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/fundo_login"
-        android:text="@string/text_button_faixa_vermelho"
-        android:onClick="OnClickVermelho"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/button_faixa_amarelo"
-        android:layout_width="319dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="136dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/fundo_login"
-        android:text="@string/text_button_faixa_amarelo"
-        android:onClick="OnClickAmarelo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/button_faixa_verde"
-        android:layout_width="319dp"
-        android:layout_height="79dp"
-        android:layout_marginBottom="288dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/fundo_login"
-        android:text="@string/text_button_faixa_verde"
-        android:onClick="OnClickVerde"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.99" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/navegationMenu"
-        android:layout_width="435dp"
-        android:layout_height="66dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
         android:background="@drawable/fundo_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
             android:id="@+id/imageShare"
@@ -145,9 +72,9 @@
             android:layout_height="60dp"
             android:layout_marginEnd="36dp"
             android:layout_marginRight="36dp"
+            android:clickable="true"
             android:contentDescription="@string/text_profile"
             android:focusable="true"
-            android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_person_black_24dp" />
@@ -199,7 +126,7 @@
             app:layout_constraintStart_toStartOf="@+id/imageShare" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/teste"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -213,5 +140,4 @@
             app:layout_constraintStart_toStartOf="@+id/imageProfile"
             app:layout_constraintTop_toTopOf="@+id/imageProfile" />
     </android.support.constraint.ConstraintLayout>
-
 </android.support.constraint.ConstraintLayout>

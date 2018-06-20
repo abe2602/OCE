@@ -1,25 +1,93 @@
 <resources>
-    <string name="app_name">Mobile Trabalho</string>
+    <string name="app_name">Observatório Cidadão</string>
 
-    <string name="sadButton">Tristeza</string>
-    <string name="happyButton">Felicidade</string>
-    <string name="angryButton">Raiva</string>
-    <string name="afraidButton">Medo</string>
-    <string name="disgustedButton">Nojo</string>
+    <string name="back4app_server_url">https://parseapi.back4app.com/</string>
+    <!-- Change the following strings as required -->
+    <string name="back4app_app_id">XsIozCVgAyFkHxYfAgfPHmqvsos52GVnzjohIvTO</string>
+    <string name="back4app_client_key">CAJQNowXCQUiEIrZjKhvzzGAPl44EyUOLgo8YRwP</string>
 
-    <string name="talkButton">Click para falar</string>
-    <string name="auxTextView">Temporário</string>
+    <string name="button_google">Entrar com o Gmail</string>
+    <string name="button_sign_in">Entrar</string>
+    <string name="button_facebook">Entrar com o Facebook</string>
+    <string name="button_cadastrar">Cadastre-se</string>
+    <string name="text_login">Login</string>
+    <string name="text_password">Senha</string>
+    <string name="text_title_pt1">Observatório Cidadão</string>
+    <string name="text_title_pt2">de Enchentes</string>
+    <string name="text_cabecalho_pt">Cadastre-se para compartilhar e visualizar informações sobre enchentes</string>
 
-    <string name="musicNameRain">Chuva</string>
-    <string name="musicNameWind">Vento</string>
-    <string name="musicNamePiano">Piano</string>
-    <string name="musicNameLeaf">Folhas</string>
-    <string name="musicVibra">Vibração</string>
-    <string name="tocarString">Tocar</string>
-    <string name="pararString">Pausar</string>
-    <string name="titleVibra">Escolha uma das músicas para descansar e relaxar!</string>
-    <string name="empty"> </string>
+    <string name="text_share">Informar</string>
+    <string name="text_home">Home</string>
+    <string name="text_profile">Perfil</string>
+    <string name="text_options">Opções</string>
+    <string name="text_notification">Notificações</string>
 
-    <string name="contentImageAnimal">Imagem de um animal</string>
+    <string name="text_button_altura_ruas">Altura da enchente nas ruas</string>
+    <string name="text_button_leito_rio">Altura da água no leito do rio</string>
+    <string name="text_button_intensidade_chuva">Intensidade da Chuva</string>
+    <string name="text_button_enviar_foto">Enviar Foto</string>
+
+    <string name="text_button_altura_baixa">Baixa</string>
+    <string name="text_button_altura_moderada">Moderada</string>
+    <string name="text_button_altura_alta">Alta</string>
+    <string name="text_button_altura_transbordando">Transbordando</string>
+
+    <string name="text_button_altura_agua">Altura da água</string>
+    <string name="text_button_altura_boneco">Altura da água pelo boneco</string>
+    <string name="text_button_faixa_cores">Altura da água faixa de cores</string>
+
+    <string name="text_button_faixa_verde">Verde</string>
+    <string name="text_button_faixa_amarelo">Amarelo</string>
+    <string name="text_button_faixa_vermelho">Vermelho</string>
+
+    <string name="text_button_boneco_tornozelo">No tornozelo</string>
+    <string name="text_button_boneco_joelho">No joelho</string>
+    <string name="text_button_boneco_cintura">Na cintura</string>
+    <string name="text_button_boneco_pescoco">No pescoço</string>
+    <string name="text_button_boneco_cabecs">Acima da cabeça</string>
+
+    <string name="text_button_altura_transitavel">Transitável</string>
+    <string name="text_button_altura_intransitavel">Intransitável</string>
+
+    <string name="text_button_chuva_forteCventos">Chuva forte com ventos</string>
+    <string name="text_button_chuva_forteSventos">Chuva forte sem ventos</string>
+    <string name="text_button_chuva_moderadaCventos">Chuva moderada com ventos</string>
+    <string name="text_button_chuva_moderadaSventos">Chuva moderada sem ventos</string>
+    <string name="text_button_chuva_fracaCventos">Chuva fraca com ventos</string>
+    <string name="text_button_chuva_fracaSventos">Chuva fraca sem ventos</string>
+    <string name="title_activity_initial_screen">InitialScreen</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="capture_button">Capture Image From Camera</string>
+    <string name="desc">capture image place holder</string>
+
+    <string name="hint_photo">Foto tirada</string>
+    <string name="hint_text_photo">Escreva um comentário</string>
+
+    <string name="text_name">Nome</string>
+    <string name="text_password_again">Repita a senha</string>
+
+    <string name="text_email">Email</string>
+
+    <string name="text_save">Salvar</string>
+    <string name="text_cancel">Cancelar</string>
+
+    <string name="text_hint_google">Botão para entrar com uma conta google</string>
+    <string name="text_hint_facebook">Botão para entrar com uma conta facebook</string>
+
+    <string name="number_zero">0</string>
+    <string name="text_feedback">Feedback</string>
+    <string name="text_shared">Compartilhamento</string>
+
+    <string name="edit_perfil">Editar</string>
+
+    <string name="temp">Temp</string>
+    <string name="vazio">   </string>
 
 </resources>

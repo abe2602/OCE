@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Compartilhar.Leito_do_rio.LeitoAlturaAgua"
+    tools:context=".compartilhar.leito_do_rio.LeitoAlturaAgua"
     android:background="@drawable/fundo_login_cinza">
 
     <RelativeLayout

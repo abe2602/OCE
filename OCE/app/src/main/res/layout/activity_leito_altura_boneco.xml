@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fundo_login_cinza"
-    tools:context=".Compartilhar.Leito_do_rio.LeitoAlturaBoneco">
+    tools:context=".compartilhar.leito_do_rio.LeitoAlturaBoneco">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
