@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
 import com.example.abe.myapplication.perfil.MainPerfil;
@@ -39,12 +40,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.setBarClick();
+        this.getInfoFromParse();
+
+        recyclerView = findViewById(R.id.recycler_view_main);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+    }
+
+    public void setBarClick(){
         ImageView imageProfile;
         ImageView imageMain;
         ImageView imageShare;
         ImageView imageConfig;
 
-       // Log.e("MainActiviry", ParseUser.getCurrentUser().getUsername());
+        // Log.e("MainActiviry", ParseUser.getCurrentUser().getUsername());
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
         this.intentProfile = new Intent(this, MainPerfil.class);
 
@@ -81,22 +92,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        this.getInfoFromParse();
-
-        recyclerView = findViewById(R.id.recycler_view_main);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
     }
+
 
     public void getInfoFromParse(){
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Relato");
         final String objectId =  ParseUser.getCurrentUser().getObjectId();
+        TextView nameUser = findViewById(R.id.userNameTextView);
+
+        nameUser.setText(ParseUser.getCurrentUser().getUsername());
 
         query.whereNotEqualTo("idUser", objectId+"uhehue");
         query.orderByDescending("createdAt");
-
-      //  textShare.setText(ParseUser.getCurrentUser().getUsername());
 
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override

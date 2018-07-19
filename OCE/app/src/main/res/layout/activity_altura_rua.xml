@@ -21,6 +21,8 @@
         android:background="@drawable/fundo_login"
         android:onClick="sendRelatoIntransitavel"
         android:text="@string/text_button_altura_intransitavel"
+        android:drawableLeft="@drawable/intransitavel"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toTopOf="@+id/button_transitavel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +41,8 @@
         android:background="@drawable/fundo_login"
         android:onClick="sendRelatoTransitavel"
         android:text="@string/text_button_altura_transitavel"
+        android:drawableLeft="@drawable/placa"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -3,6 +3,8 @@ package com.example.abe.myapplication.perfil;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -10,10 +12,15 @@ import com.example.abe.myapplication.R;
 import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
 import com.example.abe.myapplication.main.MainActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class EditPerfilActivity extends AppCompatActivity {
     private Intent intentProfile;
     private Intent intentShare;
     private Intent intentMain;
+    private RecyclerView recyclerView;
+    private EditPerfilAdapter editPerfilAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +28,17 @@ public class EditPerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_perfil);
 
         this.setBarClick();
+        int[] vet = new int[5];
+
+        for (int i = 0; i < 5; i++){
+            vet[i] = i;
+        }
+
+        recyclerView = findViewById(R.id.edit_recyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        editPerfilAdapter = new EditPerfilAdapter(vet);
+        recyclerView.setAdapter(editPerfilAdapter);
     }
 
     public void setBarClick(){

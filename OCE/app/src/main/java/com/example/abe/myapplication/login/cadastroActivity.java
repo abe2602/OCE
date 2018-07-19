@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,13 +16,22 @@ import android.widget.Toast;
 import com.example.abe.myapplication.R;
 import com.parse.Parse;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
+
+import java.io.ByteArrayOutputStream;
 
 public class cadastroActivity extends AppCompatActivity {
     private EditText usernameView;
     private EditText passwordView;
     private EditText passwordAgainView;
+    private EditText telephoneView;
+    private EditText cityView;
+    private EditText emailView;
+    private EditText addressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +39,12 @@ public class cadastroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro);
         Parse.initialize(this);
 
-      /*  final Button back_button = findViewById(R.id.back_button);
-        back_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final ProgressDialog dlg = new ProgressDialog(SignUpActivity.this);
-                dlg.setTitle("Please, wait a moment.");
-                dlg.setMessage("Returning to the login section...");
-                dlg.show();
-                Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
-                dlg.dismiss();
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });*/
-
-        usernameView = (EditText) findViewById(R.id.username);
-        passwordView = (EditText) findViewById(R.id.password);
-        passwordAgainView = (EditText) findViewById(R.id.passwordAgain);
+        usernameView = findViewById(R.id.username);
+        passwordView = findViewById(R.id.password);
+        emailView = findViewById(R.id.email);
+        passwordAgainView =  findViewById(R.id.passwordAgain);
+        telephoneView = findViewById(R.id.telephoneEditText);
+        cityView = findViewById(R.id.cityEditText);
 
         /*
         * Verifica se há campos em branco
@@ -85,6 +84,20 @@ public class cadastroActivity extends AppCompatActivity {
                         validationErrorMessage.append("digite a senha duas vezes");
                     }
                 }
+                if (isEmpty(telephoneView)) {
+                    if (validationError) {
+                        validationErrorMessage.append(" e ");
+                    }
+                    validationError = true;
+                    validationErrorMessage.append("telefone vazio");
+                }
+                if (isEmpty(cityView)) {
+                    if (validationError) {
+                        validationErrorMessage.append(" e ");
+                    }
+                    validationError = true;
+                    validationErrorMessage.append("campo vazio");
+                }
                 validationErrorMessage.append(".");
 
                 if (validationError) {
@@ -103,17 +116,30 @@ public class cadastroActivity extends AppCompatActivity {
                 dlg.setMessage("Cadastrando...");
                 dlg.show();
 
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.default_icon);
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] bitmapdata = stream.toByteArray();
+                ParseFile photoRelato  = new ParseFile("imagem.png", bitmapdata); //Parse só aceita byteArray
+
                 //Cria o novo usuário a partir do Parser
-                ParseUser user = new ParseUser();
+                final ParseUser user = new ParseUser();
                 user.setUsername(usernameView.getText().toString());
                 user.setPassword(passwordView.getText().toString());
+                user.setEmail(emailView.getText().toString());
+                user.put("raioInteresse", 10);
+                user.put("Login", emailView.getText().toString());
+                user.put("Cidade", cityView.getText().toString());
+                user.put("Telefone", Integer.valueOf(telephoneView.getText().toString()));
+                user.put("Reputacao", 0);
+                user.put("gpsEnable", true);
+
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
                             dlg.dismiss();
                             alertDisplayer("Cadastrado com sucesso!");
-
                         } else {
                             dlg.dismiss();
                             ParseUser.logOut();
@@ -121,7 +147,6 @@ public class cadastroActivity extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         });
     }

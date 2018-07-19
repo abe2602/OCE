@@ -27,6 +27,7 @@ public class LeitoAlturaBoneco extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leito_altura_boneco);
+       //  ImageView test = findViewById(R.id.test);
 
         this.setBarClick();
     }

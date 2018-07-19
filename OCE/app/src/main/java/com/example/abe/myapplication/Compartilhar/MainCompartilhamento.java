@@ -20,10 +20,7 @@ public class MainCompartilhamento extends AppCompatActivity {
     private Intent intentShare;
     private Intent intentMain;
 
-    private Intent intentRua;
-    private Intent intentLeito;
-    private Intent intentIntensidade;
-    private Intent intentFoto;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,48 +28,6 @@ public class MainCompartilhamento extends AppCompatActivity {
 
         setContentView(R.layout.activity_main_compartilhamento);
         this.setBarClick();
-        this.buttons();
-
-    }
-
-    public void buttons(){
-        Button buttonRua = (Button) findViewById(R.id.button_altura_ruas);
-        Button buttonLeito = (Button) findViewById(R.id.button_leito_rio);
-        Button buttonIntensidaade = (Button) findViewById(R.id.button_intensidade_chuva);
-        Button buttonFoto = (Button) findViewById(R.id.button_enviar_foto);
-
-        this.intentRua = new Intent(this, AlturaRuaActivity.class);
-        this.intentLeito = new Intent(this, LeitoRioActivity.class);
-        this.intentIntensidade = new Intent(this, IntensidadeActivity.class);
-        this.intentFoto = new Intent(this, FotoAcitivity.class);
-
-        buttonRua.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentRua);
-            }
-        });
-
-        buttonLeito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentLeito);
-            }
-        });
-
-        buttonIntensidaade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentIntensidade);
-            }
-        });
-
-        buttonFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intentFoto);
-            }
-        });
     }
 
     public void setBarClick(){
@@ -110,5 +65,25 @@ public class MainCompartilhamento extends AppCompatActivity {
                 startActivity(intentShare);
             }
         });
+    }
+
+    public void onClickPhoto(View view) {
+        this.intent = new Intent(this, FotoAcitivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickRainIntensity(View view) {
+        this.intent = new Intent(this, IntensidadeActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickRiver(View view) {
+        this.intent = new Intent(this, LeitoRioActivity.class);
+        startActivity(intent);
+    }
+
+    public void onClickWaterHigh(View view) {
+        this.intent = new Intent(this, AlturaRuaActivity.class);
+        startActivity(intent);
     }
 }

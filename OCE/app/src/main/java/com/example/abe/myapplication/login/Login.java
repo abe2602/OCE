@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,15 +30,23 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /*Parser para realizar o login*/
+        /*Inicialização do Parse, para que possamos usa-lo*/
         Parse.initialize(this);
-
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         user = (EditText) findViewById(R.id.editTextLogin);
         senha = (EditText) findViewById(R.id.editTextPassword);
         cadastro = (Button) findViewById(R.id.buttonCadastrar);
 
+        /*Resgata o texto salvo via SharedPreferences!!*/
+        SharedPreferences preferences = getSharedPreferences("name_shared_preferences", MODE_PRIVATE);
+        if(preferences.getString("stringKey", "") != null){
+            String putText = preferences.getString("userName", "");
+            user.setText(putText);
+
+            putText = preferences.getString("password", "");
+            senha.setText(putText);
+        }
     }
 
     @Override
@@ -53,12 +62,14 @@ public class Login extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        boolean validationError = false;
+        SharedPreferences preferences = getSharedPreferences("name_shared_preferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
-        /*
-        * FAZER A VALIDAÇÃO DOS CAMPOS!!!
-        * */
+        editor.putString("userName", user.getText().toString());
+        editor.apply();
 
+        editor.putString("password", senha.getText().toString());
+        editor.apply();
 
         //Setting up a progress dialog
         final ProgressDialog dlg = new ProgressDialog(Login.this);
