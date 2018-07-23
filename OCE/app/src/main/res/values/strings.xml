@@ -95,6 +95,12 @@
 
     <string name="telephone_edit">Telefone</string>
     <string name="city_edit">Cidade</string>
+    <string name="account_symbol">Account</string>
+
+    <string name="max_seekBar">30 KM</string>
+    <string name="min_seekBar">0 KM</string>
+    <string name="atual_seekBar"></string>
+    <string name="interesse_seekBar">Raio de Interesse</string>
 
     <!-- Strings related to Settings -->
 

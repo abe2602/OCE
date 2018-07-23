@@ -10,12 +10,15 @@
         android:id="@+id/text_time_relato"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="220dp"
-        android:layout_marginRight="220dp"
-        android:layout_marginTop="56dp"
-        android:text="Name"
+        android:layout_marginEnd="228dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="228dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/text_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.211"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAccount"
+        app:layout_constraintTop_toTopOf="@+id/imageViewAccount" />
 
     <TextView
         android:id="@+id/text_vazio"
@@ -24,7 +27,29 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorIce"
         android:text="@string/vazio"
-        app:layout_constraintTop_toBottomOf="@+id/text_time_relato"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewAccount"
         tools:layout_editor_absoluteX="0dp" />
+
+    <ImageView
+        android:id="@+id/imageViewAccount"
+        android:layout_width="58dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@string/account_symbol"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/account" />
+
+    <TextView
+        android:id="@+id/textViewNameEditPerfil"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginStart="36dp"
+        android:text="@string/temp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAccount"
+        app:layout_constraintTop_toBottomOf="@+id/text_time_relato" />
 
 </android.support.constraint.ConstraintLayout>

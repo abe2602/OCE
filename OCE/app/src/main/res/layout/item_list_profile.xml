@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="@+id/perfilImageView"
         app:layout_constraintTop_toBottomOf="@+id/perfilImageView" />
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/perfilImageView"
         android:layout_width="59dp"
         android:layout_height="52dp"

@@ -248,23 +248,24 @@
         <TextView
             android:id="@+id/name_edit_perfil"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_height="20dp"
+            android:text="@string/text_name"
+            app:layout_constraintStart_toStartOf="@+id/imageViewMainPerfil"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewMainPerfil" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageViewMainPerfil"
+            android:layout_width="51dp"
+            android:layout_height="49dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="36dp"
             android:layout_marginStart="36dp"
-            android:text="@string/text_name"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/default_icon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:text="Button"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </android.support.constraint.ConstraintLayout>

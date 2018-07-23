@@ -12,13 +12,17 @@ import android.widget.TextView;
 import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
 import com.example.abe.myapplication.main.MainActivity;
 import com.example.abe.myapplication.R;
+import com.example.abe.myapplication.utils.Utils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainPerfil extends AppCompatActivity {
 
@@ -33,6 +37,8 @@ public class MainPerfil extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PerfilAdapter perfilAdapter;
 
+    private CircleImageView mainPhotoPerfil;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +49,25 @@ public class MainPerfil extends AppCompatActivity {
         numberShare = findViewById(R.id.number_share);
         textShare = findViewById(R.id.text_share);
         userNamePerfil = findViewById(R.id.name_edit_perfil);
+        mainPhotoPerfil = findViewById(R.id.imageViewMainPerfil);
 
+        this.putImageToProfile();
         this.getInfoFromParse();
 
         recyclerView = findViewById(R.id.recycler_view_edit);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+    }
+
+    public void putImageToProfile(){
+        Utils myUtils = new Utils();
+        if(ParseUser.getCurrentUser().getParseFile("imagemPerfil") == null){
+            mainPhotoPerfil.setImageResource(R.drawable.default_icon);
+        }else{
+            ParseFile tempPhoto = ParseUser.getCurrentUser().getParseFile("imagemPerfil");
+            myUtils.loadImagesCircle(tempPhoto, mainPhotoPerfil);
+        }
     }
 
     public void setBarClick(){

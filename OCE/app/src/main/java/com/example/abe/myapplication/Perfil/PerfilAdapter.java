@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.abe.myapplication.R;
+import com.example.abe.myapplication.utils.Utils;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -19,6 +20,8 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /*Adaptador da RecyclerView.
 * É aqui onde os dados são colocados na RecyclerView. Para tal tarefa, criamos uma
@@ -58,6 +61,7 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
     class PerfilViewHolder extends RecyclerView.ViewHolder{
         TextView nameRelato, timeRelato, relato;
         ImageView photoRelato;
+        CircleImageView perfilUser;
 
         public PerfilViewHolder(View itemView) {
             super(itemView);
@@ -65,39 +69,25 @@ public class PerfilAdapter extends RecyclerView.Adapter<PerfilAdapter.PerfilView
             relato = (TextView) itemView.findViewById(R.id.text_relato);
             timeRelato = (TextView) itemView.findViewById(R.id.text_time_relato);
             photoRelato = (ImageView) itemView.findViewById(R.id.fotoRelato);
-
+            perfilUser = itemView.findViewById(R.id.perfilImageView);
         }
 
+        /*
+         * Coloca as informações dentro da RecyclerView
+         * */
         public void bind(int position){
-            //   relato.setText(objectsRecyclerView.get(position).getString("textoImagem"));
+            Utils utils = new Utils();
             nameRelato.setText(objectsRecyclerView.get(position).getString("userName"));
-            Log.d("catigoria", objectsRecyclerView.get(position).getString("Categoria"));
+            utils.findPhoto( objectsRecyclerView.get(position).getString("idUser"), perfilUser);
 
             if(objectsRecyclerView.get(position).getString("Categoria").equals("Foto")){
                 ParseFile tempPhoto = objectsRecyclerView.get(position).getParseFile("Imagem");
                 relato.setText(objectsRecyclerView.get(position).getString("textoImagem"));
-                loadImages(tempPhoto, photoRelato);
+                utils.loadImages(tempPhoto, photoRelato);
             }else{
                 relato.setText(objectsRecyclerView.get(position).getString("Categoria"));
             }
         }
 
-        private void loadImages(ParseFile thumbnail, final ImageView img) {
-
-            if (thumbnail != null) {
-                thumbnail.getDataInBackground(new GetDataCallback() {
-                    @Override
-                    public void done(byte[] data, ParseException e) {
-                        if (e == null) {
-                            Bitmap bmp = BitmapFactory.decodeByteArray(data, 0, data.length);
-                            img.setImageBitmap(bmp);
-                        } else {
-                        }
-                    }
-                });
-            } else {
-                // img.setImageResource();
-            }
-        }// load image
     }
 }

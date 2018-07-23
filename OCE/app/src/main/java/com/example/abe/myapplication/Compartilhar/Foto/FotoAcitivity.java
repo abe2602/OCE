@@ -1,10 +1,7 @@
 package com.example.abe.myapplication.compartilhar.foto;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,15 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
-import com.example.abe.myapplication.compartilhar.enchente_nas_ruas.AlturaRuaActivity;
 import com.example.abe.myapplication.main.MainActivity;
 import com.example.abe.myapplication.perfil.MainPerfil;
 import com.example.abe.myapplication.R;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -30,7 +21,6 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 public class FotoAcitivity extends AppCompatActivity {
     private Intent intentProfile;
@@ -139,13 +129,13 @@ public class FotoAcitivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if(e == null){
-                    Log.i("Intensidade chuva", "deu bom");
+                    Log.i("Foto", "deu bom");
                     finish();
                     Intent intent = new Intent(FotoAcitivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }else{
-                    Log.i("Intensidade chuva", "ddeu ruim");
+                    Log.i("Foto", "ddeu ruim");
                 }
             }
         });
