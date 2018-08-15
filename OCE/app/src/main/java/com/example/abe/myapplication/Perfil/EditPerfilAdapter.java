@@ -23,6 +23,13 @@ import android.widget.TextView;
 
 import com.example.abe.myapplication.R;
 import com.example.abe.myapplication.utils.Utils;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -122,11 +129,12 @@ public class EditPerfilAdapter extends  RecyclerView.Adapter<EditPerfilAdapter.E
         return -1;
     }
 
-    class EditPerfilViewHolder extends RecyclerView.ViewHolder{
+    class EditPerfilViewHolder extends RecyclerView.ViewHolder implements OnMapReadyCallback {
         private CheckBox checkBox;
         private TextView name, atualSeek;
         private CircleImageView image;
         private SeekBar seekbar;
+        private GoogleMap mMap;
         private Button saveButton;
 
         public EditPerfilViewHolder(View itemView) {
@@ -203,12 +211,25 @@ public class EditPerfilAdapter extends  RecyclerView.Adapter<EditPerfilAdapter.E
                     });
                     break;
                 case 4:
+
                     break;
 
                 default:
                     ParseUser.getCurrentUser().saveInBackground();
                     break;
             }
+        }
+
+        @Override
+        public void onMapReady(GoogleMap googleMap) {
+            mMap = googleMap;
+
+            // Add a marker in Sydney and move the camera
+            LatLng pira = new LatLng(-22.768682,  -47.589951);
+            mMap.addMarker(new MarkerOptions().position(pira).title("Marker in Piracicaba"));
+            CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(pira).build();
+            //  mMap.moveCamera(CameraUpdateFactory.newLatLng(pira));
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         }
     }
 }

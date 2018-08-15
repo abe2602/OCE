@@ -58,11 +58,8 @@
         <activity android:name=".login.cadastroActivity" />
         <activity android:name=".perfil.EditPerfilActivity" />
         <activity
-            android:name=".perfil.SettingsActivity"
-            android:label="@string/title_activity_settings" />
-        <activity
-            android:name=".perfil.editPerfilt"
-            android:label="@string/title_activity_edit_perfilt"></activity>
+            android:name=".utils.MapsActivity"
+            android:label="@string/title_activity_maps" />
     </application>
 
 </manifest>

@@ -4,27 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorWhite">
+    android:background="@color/colorWhite"
+    tools:layout_editor_absoluteY="25dp">
 
-    <TextView
-        android:id="@+id/text_time_relato"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="192dp"
-        android:layout_marginRight="192dp"
-        android:layout_marginTop="24dp"
-        android:text="Map"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/mapViewEdit"
+        layout="@layout/activity_maps_edit_perfil"
+        android:layout_width="match_parent"
+        android:layout_height="295dp" />
 
     <TextView
         android:id="@+id/text_vazio"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="10dp"
         android:background="@color/colorIce"
         android:text="@string/vazio"
-        app:layout_constraintTop_toBottomOf="@+id/text_time_relato"
+        app:layout_constraintTop_toBottomOf="@+id/mapViewEdit"
         tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

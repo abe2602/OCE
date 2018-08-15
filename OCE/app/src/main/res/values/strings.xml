@@ -174,5 +174,8 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_edit_perfilt">Settings</string>
+    <string name="title_activity_maps">Map</string>
 
+    <string name="open_drawer">Abrir</string>
+    <string name="close_drawer">Fechar</string>
 </resources>

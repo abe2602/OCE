@@ -79,23 +79,18 @@
         app:layout_constraintStart_toStartOf="@+id/mapView"
         app:layout_constraintTop_toBottomOf="@+id/mapView" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    <include
         android:id="@+id/mapView"
-        android:layout_width="317dp"
-        android:layout_height="294dp"
-        android:layout_marginBottom="8dp"
+        layout="@layout/activity_maps"
+        android:layout_width="352dp"
+        android:layout_height="295dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.075"
-        class="com.google.android.gms.maps.SupportMapFragment"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <include
         android:id="@+id/id"

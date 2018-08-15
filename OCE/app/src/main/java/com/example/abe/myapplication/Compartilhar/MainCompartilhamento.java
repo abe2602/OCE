@@ -14,6 +14,7 @@ import com.example.abe.myapplication.compartilhar.leito_do_rio.LeitoRioActivity;
 import com.example.abe.myapplication.main.MainActivity;
 import com.example.abe.myapplication.perfil.MainPerfil;
 import com.example.abe.myapplication.R;
+import com.example.abe.myapplication.utils.MapsActivity;
 
 public class MainCompartilhamento extends AppCompatActivity {
     private Intent intentProfile;

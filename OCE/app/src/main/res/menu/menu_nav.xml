@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:id="@+id/nav_item_altura_rua"
+            android:icon="@drawable/warning"
+            android:title="@string/text_button_altura_ruas" />
+
+        <item android:id="@+id/nav_item_intensidade_chuva"
+            android:icon="@drawable/cloud"
+            android:title="@string/text_button_intensidade_chuva" />
+
+        <item android:id="@+id/nav_item_photo"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="@string/text_button_enviar_foto" />
+
+        <item android:title="@string/text_button_leito_rio"
+            android:icon="@drawable/wave">
+            <menu>
+                <item android:id="@+id/nav_item_rua_leito"
+                    android:icon="@drawable/baixo"
+                    android:title="@string/text_button_altura_ruas" />
+
+                <item android:id="@+id/nav_item_boneco"
+                    android:icon="@drawable/vazio"
+                    android:title="@string/text_button_altura_boneco" />
+
+                <item android:id="@+id/nav_item_cor"
+                    android:icon="@drawable/faixa_default"
+                    android:title="@string/text_button_faixa_cores" />
+            </menu>
+        </item>
+    </group>
+</menu>

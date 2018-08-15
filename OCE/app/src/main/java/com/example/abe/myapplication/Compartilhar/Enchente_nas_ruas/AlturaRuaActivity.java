@@ -1,6 +1,14 @@
 package com.example.abe.myapplication.compartilhar.enchente_nas_ruas;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Build;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,11 +24,19 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class AlturaRuaActivity extends AppCompatActivity {
+
+public class AlturaRuaActivity extends AppCompatActivity{
     private Intent intentProfile;
     private Intent intentShare;
     private Intent intentMain;
     private String tipo = "Altura Água na rua";
+
+    private LocationManager locationManager;
+    private Location location;
+    private LocationListener locationListener;
+
+    private double longitude;
+    private double latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +44,7 @@ public class AlturaRuaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_altura_rua);
 
         setBarClick();
+        this.getGPS();
     }
 
     public void setBarClick(){
@@ -73,6 +90,8 @@ public class AlturaRuaActivity extends AppCompatActivity {
         relato.put("userName", ParseUser.getCurrentUser().getUsername());
         relato.put("tipoRelato", tipo);
         relato.put("Categoria", categoria);
+        relato.put("Latitude", latitude);
+        relato.put("Longitude", longitude);
 
         relato.saveInBackground(new SaveCallback() {
             @Override
@@ -91,10 +110,67 @@ public class AlturaRuaActivity extends AppCompatActivity {
     }
 
     public void sendRelatoIntransitavel(View view) {
-        this.sendRelato("Rua intransitável", this.tipo);
+        this.sendRelato("intransitável", this.tipo);
     }
 
     public void sendRelatoTransitavel(View view) {
-        this.sendRelato("Rua transitável", this.tipo);
+        this.sendRelato("transitável", this.tipo);
     }
+
+    public void startGPS(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET}
+                        , 10);
+            }
+            return;
+        }
+
+        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+    }
+
+    public void getGPS(){
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Log.d("longlatC", String.valueOf(location.getLongitude()));
+                Log.d("longlatC", String.valueOf(location.getLatitude()));
+
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
+                //searchAdrress(location.getLongitude(), location.getLatitude());
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+                Log.d("longlat", String.valueOf(location.getLongitude()));
+                Log.d("longlat", String.valueOf(location.getLatitude()));
+
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
+
+                // searchAdrress(location.getLongitude(), location.getLatitude());
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(i);
+            }
+        };
+
+        startGPS();
+    }
+
 }

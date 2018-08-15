@@ -25,6 +25,7 @@ public class Login extends AppCompatActivity {
     private Button cadastro;
     private EditText user, senha;
     private Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

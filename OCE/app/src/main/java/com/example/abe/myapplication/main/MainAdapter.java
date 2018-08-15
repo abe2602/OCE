@@ -3,6 +3,8 @@ package com.example.abe.myapplication.main;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
+import android.location.Geocoder;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.abe.myapplication.R;
 import com.example.abe.myapplication.login.Login;
@@ -23,6 +26,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +39,23 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         private int numberItens;
         private List<ParseObject> objectsRecyclerView;
 
-        public MainAdapter(int numberItens,List<ParseObject> objectsRecyclerView ){
+    public int getNumberItens() {
+        return numberItens;
+    }
+
+    public void setNumberItens(int numberItens) {
+        this.numberItens = numberItens;
+    }
+
+    public List<ParseObject> getObjectsRecyclerView() {
+        return objectsRecyclerView;
+    }
+
+    public void setObjectsRecyclerView(List<ParseObject> objectsRecyclerView) {
+        this.objectsRecyclerView = objectsRecyclerView;
+    }
+
+    public MainAdapter(int numberItens, List<ParseObject> objectsRecyclerView ){
             this.numberItens = numberItens;
             this.objectsRecyclerView = objectsRecyclerView;
         }
@@ -90,9 +110,94 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
                 relato.setText(objectsRecyclerView.get(position).getString("textoImagem"));
                 util.loadImages(tempPhoto, photoRelato);
             }else{
-                relato.setText(objectsRecyclerView.get(position).getString("Categoria"));
+                double longitude = objectsRecyclerView.get(position).getNumber("Longitude").doubleValue();
+                double latitude = objectsRecyclerView.get(position).getNumber("Latitude").doubleValue();
+                String relateString = objectsRecyclerView.get(position).getString("Categoria") + " " + this.searchAdrress(longitude, latitude);
+                relato.setText(relateString);
+                double tam = 200;//relato.getMeasuredWidth();
+                Paint paint = new Paint();
+                float width;
+
+                switch (objectsRecyclerView.get(position).getString("tipoRelato")) {
+                    case "Altura Água na rua":
+                        relateString = this.searchAdrress(longitude, latitude) + " está " + objectsRecyclerView.get(position).getString("Categoria");
+                        width = paint.measureText(relateString);
+
+                        if(width > tam){
+                            relateString = this.searchAdrress(longitude, latitude) + " está \n" + objectsRecyclerView.get(position).getString("Categoria");
+                        }
+
+                        relato.setText(relateString);
+                        break;
+                    case "Intensidade da chuva":
+                        relateString = objectsRecyclerView.get(position).getString("Categoria") + " na " + this.searchAdrress(longitude, latitude);
+                        width = paint.measureText(relateString);
+
+                        if(width > tam){
+                            relateString = objectsRecyclerView.get(position).getString("Categoria") + " na \n" + this.searchAdrress(longitude, latitude);
+                        }
+                        relato.setText(relateString);
+                        break;
+                    case "Altura da água no boneco":
+                        relateString = objectsRecyclerView.get(position).getString("Categoria") + " na " + this.searchAdrress(longitude, latitude);
+                        width = paint.measureText(relateString);
+
+                        if(width > tam){
+                            relateString = objectsRecyclerView.get(position).getString("Categoria") + " na \n" + this.searchAdrress(longitude, latitude);
+                        }
+
+                        relato.setText(relateString);
+                        break;
+                    case "Faixa de cores":
+                        relateString = objectsRecyclerView.get(position).getString("Categoria") + " na " + this.searchAdrress(longitude, latitude);
+                        width = paint.measureText(relateString);
+
+                        if(width > tam){
+                            relateString = objectsRecyclerView.get(position).getString("Categoria") + " na \n" + this.searchAdrress(longitude, latitude);
+                        }
+
+                        relato.setText(relateString);
+                        break;
+                    case "Altura da água no leito do rio":
+                        relateString = objectsRecyclerView.get(position).getString("Categoria") + " na " + this.searchAdrress(longitude, latitude);
+                        width = paint.measureText(relateString);
+
+                        if(width > tam){
+                            relateString = objectsRecyclerView.get(position).getString("Categoria") + " na \n" + this.searchAdrress(longitude, latitude);
+                        }
+
+                        relato.setText(relateString);
+                        break;
+                }
             }
         }
+
+        public String searchAdrress(double longi, double lat)  {
+
+            Geocoder geocoder;
+            android.location.Address singleAdress = null;
+            List<android.location.Address> listAdress;
+
+            geocoder = new Geocoder(itemView.getContext());
+
+            try {
+                listAdress = geocoder.getFromLocation(lat, longi, 1);
+
+                if (listAdress.size() > 0){
+                    singleAdress = listAdress.get(0);
+                    Log.d("end", singleAdress.getThoroughfare());
+
+                }else {
+                    Log.d("end", "deu ruim");
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return singleAdress.getThoroughfare();
+        }
+
     }
 }
 

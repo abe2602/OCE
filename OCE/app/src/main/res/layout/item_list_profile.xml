@@ -46,10 +46,10 @@
         android:id="@+id/text_vazio"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorIce"
         android:text="@string/vazio"
-        app:layout_constraintTop_toBottomOf="@+id/fotoRelato"
+        app:layout_constraintTop_toBottomOf="@+id/text_relato"
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageView

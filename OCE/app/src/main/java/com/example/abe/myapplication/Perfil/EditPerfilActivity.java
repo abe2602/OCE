@@ -17,6 +17,13 @@ import android.widget.ImageView;
 import com.example.abe.myapplication.R;
 import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
 import com.example.abe.myapplication.main.MainActivity;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
@@ -28,13 +35,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditPerfilActivity extends AppCompatActivity {
+public class EditPerfilActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Intent intentProfile;
     private Intent intentShare;
     private Intent intentMain;
     private RecyclerView recyclerView;
     private EditPerfilAdapter editPerfilAdapter;
-    private ImageView nameImageView;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,7 @@ public class EditPerfilActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         editPerfilAdapter = new EditPerfilAdapter(vet);
         recyclerView.setAdapter(editPerfilAdapter);
+
     }
 
     public void setBarClick(){
@@ -126,5 +134,17 @@ public class EditPerfilActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        // Add a marker in Sydney and move the camera
+        LatLng pira = new LatLng(-22.768682,  -47.589951);
+        mMap.addMarker(new MarkerOptions().position(pira).title("Marker in Piracicaba"));
+        CameraPosition cameraPosition = new CameraPosition.Builder().zoom(15).target(pira).build();
+        //  mMap.moveCamera(CameraUpdateFactory.newLatLng(pira));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 }
