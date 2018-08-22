@@ -145,7 +145,7 @@ public class IntensidadeActivity extends AppCompatActivity {
             return;
         }
 
-        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+        locationManager.requestLocationUpdates("gps", 50, 0, locationListener);
     }
 
     public void getGPS(){
