@@ -17,7 +17,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /*
-* Classe de métodos uteis
+* Classe de métodos uteis dentro de todo o projeto
+* Criado por Bruno Bacelar Abe
 * */
 public class Utils {
     //Converte e coloca o parseFile para o CircleImageView

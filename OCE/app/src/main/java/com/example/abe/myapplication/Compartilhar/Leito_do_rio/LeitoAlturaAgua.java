@@ -24,8 +24,15 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+import java.util.ArrayList;
+import java.util.List;
 
+/*
+ * Classe de compartilhamento referente á altura no leito do rio
+ * A Latitude e longitude são postos no relato para que possamos aplicar os filtros
+ * propostos, assim como recuperar o nome da rua.
+ * Criado por Bruno Bacelar Abe
+ * */
 public class LeitoAlturaAgua extends AppCompatActivity {
     private Intent intentProfile;
     private Intent intentShare;
@@ -49,6 +56,7 @@ public class LeitoAlturaAgua extends AppCompatActivity {
         this.getGPS();
     }
 
+    //Ações da barra de navegação
     public void setBarClick(){
         ImageView imageProfile = findViewById(R.id.imageProfile);
         this.intentProfile = new Intent(this, MainPerfil.class);
@@ -86,7 +94,13 @@ public class LeitoAlturaAgua extends AppCompatActivity {
         });
     }
 
+    //Envia o relato
     public void sendRelato(String categoria, String tipo){
+        if(latitude == 0 && longitude == 0){
+            longitude = ParseUser.getCurrentUser().getDouble("Longitude");
+            latitude = ParseUser.getCurrentUser().getDouble("Latitude");
+        }
+
         ParseObject relato = new ParseObject("Relato");
         relato.put("idUser", ParseUser.getCurrentUser().getObjectId());
         relato.put("userName", ParseUser.getCurrentUser().getUsername());
@@ -94,6 +108,12 @@ public class LeitoAlturaAgua extends AppCompatActivity {
         relato.put("Categoria", categoria);
         relato.put("Latitude", latitude);
         relato.put("Longitude", longitude);
+        relato.put("Likes", 0);
+        relato.put("Dislikes", 0);
+
+        List<String> taps = new ArrayList<>();
+        taps.add("nada");
+        relato.put("RelatoRating", taps);
 
         relato.saveInBackground(new SaveCallback() {
             @Override
@@ -127,6 +147,7 @@ public class LeitoAlturaAgua extends AppCompatActivity {
         this.sendRelato("Transbordando", this.tipo);
     }
 
+    //Inicia o GPS
     public void startGPS(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -142,6 +163,7 @@ public class LeitoAlturaAgua extends AppCompatActivity {
         locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
     }
 
+    //Auxiliar do GPS
     public void getGPS(){
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 

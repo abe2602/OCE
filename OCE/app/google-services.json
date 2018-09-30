@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "790690493164",
+    "firebase_url": "https://oceapp-210015.firebaseio.com",
+    "project_id": "oceapp-210015",
+    "storage_bucket": "oceapp-210015.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790690493164:android:068272a0958fe8f9",
+        "android_client_info": {
+          "package_name": "com.example.abe.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790690493164-8ijc44nfqdrrgpp639ms22gd4tachqi0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.abe.myapplication",
+            "certificate_hash": "269029d217e510680974b94acb509b076e52274b"
+          }
+        },
+        {
+          "client_id": "790690493164-7ts6g6kk7u10ufscef49qh5i1vg8kc51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXVOtyhwnOyXSzPDRsiRkUtRr-7BiJznQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790690493164-7ts6g6kk7u10ufscef49qh5i1vg8kc51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

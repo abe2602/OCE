@@ -19,8 +19,11 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -71,35 +74,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         return viewHolder;
     }
 
-    //Fazer o Switch com dois layouts, um vazio e o outro normal
     @Override
-    public void onBindViewHolder(MainViewHolder holder, int position) {
-        double longitude = objectsRecyclerView.get(position).getNumber("Longitude").doubleValue();
-        double latitude = objectsRecyclerView.get(position).getNumber("Latitude").doubleValue();
-        double raio = (int)ParseUser.getCurrentUser().getNumber("raioInteresse");
-        double dist = findDistanceLat(latitude, longitude, myLat, myLong);
+    public void onBindViewHolder(@NonNull MainViewHolder holder, int position) {
         holder.bind(position);
-
-        if(dist <= raio){
-      //    holder.bind(position);
-        }else{
-          // holder.bind(0);
-        }
-    }
-
-    private double findDistanceLat(double lat_inicial, double long_inicial, double lat_final, double long_final){
-        double d2r = 0.017453292519943295769236;
-        double dlong = (long_final - long_inicial) * d2r;
-        double dlat = (lat_final - lat_inicial) * d2r;
-
-        double temp_sin = sin(dlat/2.0);
-        double temp_cos = cos(lat_inicial * d2r);
-        double temp_sin2 = sin(dlong/2.0);
-
-        double a = (temp_sin * temp_sin) + (temp_cos * temp_cos) * (temp_sin2 * temp_sin2);
-        double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
-
-        return 6368.1 * c;
     }
 
     @Override
@@ -109,8 +86,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
     class MainViewHolder extends RecyclerView.ViewHolder{
         TextView nameRelato, timeRelato, relato;
-        ImageView photoRelato;
+        ImageView photoRelato, likeShare, dislikeShare;
         CircleImageView perfilUser;
+        double likeCont, dislikeCont;
+        int position;
 
         public MainViewHolder(View itemView) {
             super(itemView);
@@ -119,18 +98,30 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             timeRelato =  itemView.findViewById(R.id.text_time_relato);
             photoRelato = itemView.findViewById(R.id.fotoRelato);
             perfilUser = itemView.findViewById(R.id.perfilImageView);
+            likeShare = itemView.findViewById(R.id.imageLike);
+            dislikeShare = itemView.findViewById(R.id.imageDislike);
         }
 
         /*
         * Coloca as informações dentro da RecyclerView
-        *
-        * NÃO SEI SE VAI FUNCIONAR, MAS A IDEIA É COLOCAR UM NOVO XML PARA OS RELATOS QUE NÃO ENTRAM NO IF
-        * ESSE XML VAI ESTAR VAZIO
         * */
-        public void bind(int position){
-
+        public void bind(final int position){
+            this.position = position;
+            likeCont = objectsRecyclerView.get(position).getNumber("Likes").doubleValue();
+            dislikeCont = objectsRecyclerView.get(position).getNumber("Dislikes").doubleValue();
+            final String state = objectsRecyclerView.get(position).getString("Tapped");
             double longitude = objectsRecyclerView.get(position).getNumber("Longitude").doubleValue();
             double latitude = objectsRecyclerView.get(position).getNumber("Latitude").doubleValue();
+            final List<String> taps =  objectsRecyclerView.get(position).getList("RelatoRating");
+
+            if(taps.contains(ParseUser.getCurrentUser().getUsername().concat("like"))){
+                likeShare.setImageResource(R.drawable.like_blue);
+                dislikeShare.setImageResource(R.drawable.dislike);
+            }else if(taps.contains(ParseUser.getCurrentUser().getUsername().concat("dislike"))){
+                dislikeShare.setImageResource(R.drawable.dislike_blue);
+                likeShare.setImageResource(R.drawable.like);
+            }
+
 
             Log.d("longi", String.valueOf(longitude));
 
@@ -138,6 +129,68 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
             nameRelato.setText(objectsRecyclerView.get(position).getString("userName"));
             util.findPhoto( objectsRecyclerView.get(position).getString("idUser"), perfilUser);
             objectsRecyclerView.get(position).getDate("updatedAt");
+
+            likeShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> taps =  objectsRecyclerView.get(position).getList("RelatoRating");
+
+                    likeShare.setImageResource(R.drawable.like_blue);
+                    dislikeShare.setImageResource(R.drawable.dislike);
+
+                    likeCont += 1;
+
+                    if(dislikeCont > 0)
+                        dislikeCont--;
+
+                    if(taps.contains(ParseUser.getCurrentUser().getUsername().concat("dislike"))){
+                        int index = taps.indexOf(ParseUser.getCurrentUser().getUsername().concat("dislike"));
+                        String remove = taps.get(index);
+                        taps.remove(remove);
+                        // taps.remove(index);
+                    }
+
+                    if(!taps.contains(ParseUser.getCurrentUser().getUsername().concat("like"))){
+                        taps.add(ParseUser.getCurrentUser().getUsername().concat("like"));
+                    }
+
+                    objectsRecyclerView.get(position).put("Likes", likeCont);
+                    objectsRecyclerView.get(position).put("Dislikes", dislikeCont);
+                    objectsRecyclerView.get(position).put("RelatoRating", taps);
+                    objectsRecyclerView.get(position).saveInBackground();
+                }
+            });
+
+            dislikeShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    List<String> taps2 =  objectsRecyclerView.get(position).getList("RelatoRating");
+                    dislikeShare.setImageResource(R.drawable.dislike_blue);
+                    likeShare.setImageResource(R.drawable.like);
+
+                    dislikeCont++;
+
+                    if(likeCont > 0)
+                        likeCont--;
+
+                    if(taps2.contains(ParseUser.getCurrentUser().getUsername().concat("like"))){
+                        int index = taps2.indexOf(ParseUser.getCurrentUser().getUsername().concat("like"));
+                        String remove = taps2.get(index);
+                        taps2.remove(remove);
+                       // taps2.remove(index);
+                    }
+
+                    if(!taps2.contains(ParseUser.getCurrentUser().getUsername().concat("dislike"))){
+                        taps2.add(ParseUser.getCurrentUser().getUsername().concat("dislike"));
+
+                    }
+
+                    objectsRecyclerView.get(position).put("Likes", likeCont);
+                    objectsRecyclerView.get(position).put("Dislikes", dislikeCont);
+                    objectsRecyclerView.get(position).put("RelatoRating", taps2);
+                    objectsRecyclerView.get(position).saveInBackground();
+                }
+            });
 
             String dateString = null;
             SimpleDateFormat sdfr = new SimpleDateFormat("dd/MMM/yyyy HH:mm:ss");
@@ -218,34 +271,38 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
         }
 
         /*
-        * BUGOU AQUI POR ALGUM FUCKING MOTIVO, INVESTIGAR
+        * Encontra o endereço a partir da longitude e latitude
         * */
-        public String searchAdrress(double longi, double lat)  {
-            Geocoder geocoder;
-            android.location.Address singleAdress = null;
-            List<android.location.Address> listAdress;
+        private String searchAdrress(double longi, double lat)  {
 
             Log.d("longig", String.valueOf(longi));
             Log.d("longig", String.valueOf(lat));
 
-            geocoder = new Geocoder(itemView.getContext());
+           if(longi != 0 && lat != 0){
+               Geocoder geocoder;
+               android.location.Address singleAdress = null;
+               List<android.location.Address> listAdress;
 
-            try {
-                listAdress = geocoder.getFromLocation(lat, longi, 1);
+               geocoder = new Geocoder(itemView.getContext());
 
-                if (listAdress.size() > 0){
-                    singleAdress = listAdress.get(0);
-                    Log.d("end", singleAdress.getThoroughfare());
+               try {
+                   listAdress = geocoder.getFromLocation(lat,  longi, 1);
 
-                }else {
-                    Log.d("end", "deu ruim");
-                    return "deu ruim";
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                   if (listAdress.size() > 0){
+                       singleAdress = listAdress.get(0);
+                       Log.d("searchAdrress", singleAdress.getThoroughfare());
 
-                return singleAdress.getThoroughfare();
+                   }else {
+                       Log.d("searchAdrress", "Não encontrado");
+                       return " ";
+                   }
+               } catch (IOException e) {
+                   e.printStackTrace();
+               }
+
+               return singleAdress.getThoroughfare();
+           }
+           return "temp";
         }
 
     }

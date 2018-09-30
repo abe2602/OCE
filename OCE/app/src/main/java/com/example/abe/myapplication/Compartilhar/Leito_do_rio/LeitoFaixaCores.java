@@ -24,6 +24,15 @@ import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/*
+ * Classe de compartilhamento referente à faixa de cores
+ * A Latitude e longitude são postos no relato para que possamos aplicar os filtros
+ * propostos, assim como recuperar o nome da rua.
+ * Criado por Bruno Bacelar Abe
+ * */
 public class LeitoFaixaCores extends AppCompatActivity {
     private Intent intentProfile;
     private Intent intentShare;
@@ -85,6 +94,11 @@ public class LeitoFaixaCores extends AppCompatActivity {
     }
 
     public void sendRelato(String categoria, String tipo){
+        if(latitude == 0 && longitude == 0){
+            longitude = ParseUser.getCurrentUser().getDouble("Longitude");
+            latitude = ParseUser.getCurrentUser().getDouble("Latitude");
+        }
+
         ParseObject relato = new ParseObject("Relato");
         relato.put("idUser", ParseUser.getCurrentUser().getObjectId());
         relato.put("userName", ParseUser.getCurrentUser().getUsername());
@@ -92,6 +106,12 @@ public class LeitoFaixaCores extends AppCompatActivity {
         relato.put("Categoria", categoria);
         relato.put("Latitude", latitude);
         relato.put("Longitude", longitude);
+        relato.put("Likes", 0);
+        relato.put("Dislikes", 0);
+
+        List<String> taps = new ArrayList<>();
+        taps.add("nada");
+        relato.put("RelatoRating", taps);
 
         relato.saveInBackground(new SaveCallback() {
             @Override

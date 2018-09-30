@@ -15,6 +15,12 @@ import com.example.abe.myapplication.main.MainActivity;
 import com.example.abe.myapplication.perfil.MainPerfil;
 import com.example.abe.myapplication.R;
 import com.example.abe.myapplication.utils.MapsActivity;
+/*
+ * Classe de compartilhamento referente a gestão das opções de compartilhamento.
+ * Basicamente, todas as opções do usuário (tirar foto, intensidade de chuva, etc) estão
+ * unidos nessa classe.
+ * Criado por Bruno Bacelar Abe
+ * */
 
 public class MainCompartilhamento extends AppCompatActivity {
     private Intent intentProfile;

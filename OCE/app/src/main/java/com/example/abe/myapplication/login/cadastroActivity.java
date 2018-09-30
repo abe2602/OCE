@@ -17,13 +17,15 @@ import com.example.abe.myapplication.R;
 import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
-
 import java.io.ByteArrayOutputStream;
 
+/*
+ * Classe de cadastro.
+ *
+ * Criado por Bruno Bacelar Abe
+ * */
 public class cadastroActivity extends AppCompatActivity {
     private EditText usernameView;
     private EditText passwordView;
@@ -31,7 +33,6 @@ public class cadastroActivity extends AppCompatActivity {
     private EditText telephoneView;
     private EditText cityView;
     private EditText emailView;
-    private EditText addressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class cadastroActivity extends AppCompatActivity {
         cityView = findViewById(R.id.cityEditText);
 
         /*
-        * Verifica se há campos em branco
+        * Função do botão
         * */
         final Button signup_button = findViewById(R.id.button_save2);
         signup_button.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +133,8 @@ public class cadastroActivity extends AppCompatActivity {
                 user.put("Cidade", cityView.getText().toString());
                 user.put("Telefone", Integer.valueOf(telephoneView.getText().toString()));
                 user.put("Reputacao", 0);
+                user.put("Longitude", 0);
+                user.put("Latitude", 0);
                 user.put("gpsEnable", true);
 
                 user.signUpInBackground(new SignUpCallback() {
@@ -151,6 +154,7 @@ public class cadastroActivity extends AppCompatActivity {
         });
     }
 
+    //Verifica se o campo está vazio
     private boolean isEmpty(EditText text) {
         if (text.getText().toString().trim().length() > 0) {
             return false;
@@ -159,6 +163,7 @@ public class cadastroActivity extends AppCompatActivity {
         }
     }
 
+    //Verifica se os dois textos de senha estão batendo
     private boolean isMatching(EditText text1, EditText text2){
         if(text1.getText().toString().equals(text2.getText().toString())){
             return true;
@@ -168,6 +173,7 @@ public class cadastroActivity extends AppCompatActivity {
         }
     }
 
+    //Cria um alerta
     private void alertDisplayer(String title){
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle(title)

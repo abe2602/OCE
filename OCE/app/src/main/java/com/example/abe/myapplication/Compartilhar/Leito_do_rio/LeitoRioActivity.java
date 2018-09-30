@@ -11,6 +11,12 @@ import com.example.abe.myapplication.main.MainActivity;
 import com.example.abe.myapplication.perfil.MainPerfil;
 import com.example.abe.myapplication.R;
 
+/*
+ * Classe de compartilhamento referente a altura da água no leito do rio
+ * A Latitude e longitude são postos no relato para que possamos aplicar os filtros
+ * propostos, assim como recuperar o nome da rua.
+ * Criado por Bruno Bacelar Abe
+ * */
 public class LeitoRioActivity extends AppCompatActivity {
     private ImageView imageProfile;
     private ImageView imageMain;

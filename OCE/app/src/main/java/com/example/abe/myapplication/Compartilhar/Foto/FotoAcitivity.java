@@ -1,8 +1,6 @@
 package com.example.abe.myapplication.compartilhar.foto;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,14 +11,12 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
 import com.example.abe.myapplication.main.MainActivity;
@@ -44,7 +40,14 @@ import com.parse.SaveCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
+/*
+ * Classe de compartilhamento referente a tirar fotos
+ * A Latitude e longitude são postos no relato para que possamos aplicar os filtros
+ * propostos, assim como recuperar o nome da rua.
+ * Criado por Bruno Bacelar Abe
+ * */
 public class FotoAcitivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
     private Intent intentProfile;
     private Intent intentShare;
@@ -102,6 +105,7 @@ public class FotoAcitivity extends AppCompatActivity implements OnMapReadyCallba
         }
     }
 
+    //Ações da barra
     public void setBarClick(){
         ImageView imageProfile = findViewById(R.id.imageProfile);
         this.intentProfile = new Intent(this, MainPerfil.class);
@@ -137,6 +141,7 @@ public class FotoAcitivity extends AppCompatActivity implements OnMapReadyCallba
         });
     }
 
+    //Envia o relato
     public void sendRelato(String categoria, String tipo){
         ParseObject relato = new ParseObject("Relato");
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -148,6 +153,12 @@ public class FotoAcitivity extends AppCompatActivity implements OnMapReadyCallba
         relato.put("tipoRelato", "foto");
         relato.put("Latitude", latitude);
         relato.put("Longitude", longitude);
+        relato.put("Likes", 0);
+        relato.put("Dislikes", 0);
+
+        List<String> taps = new ArrayList<>();
+        taps.add("nada");
+        relato.put("RelatoRating", taps);
 
         imageBitmap.compress(Bitmap.CompressFormat.PNG, 75, stream);
         byte[] relatoPhotoByteArray = stream.toByteArray();

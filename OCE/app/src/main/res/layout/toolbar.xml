@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
@@ -44,15 +44,16 @@
         android:layout_height="58dp"
         android:background="@drawable/fundo_login_cinza"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:ignore="MissingConstraints">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="23dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
             android:background="@drawable/fundo_login_cinza"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,10 +62,12 @@
             android:id="@+id/textViewOpcoes"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/text_options"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/toolbar"
             app:layout_constraintHorizontal_bias="0.393"
             app:layout_constraintStart_toStartOf="@+id/toolbar"
@@ -98,124 +101,133 @@
 
     </android.support.constraint.ConstraintLayout>
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="?android:attr/windowBackground"
+        app:itemBackground="@color/colorPrimary"
+        app:itemIconTint="@color/colorWhite"
+        app:itemTextColor="@color/colorPrimaryDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" >
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/navegationMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fundo_login"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <ImageView
+                android:id="@+id/imageShare"
+                android:layout_width="64dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:contentDescription="@string/text_share"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageProfile"
+                app:layout_constraintStart_toEndOf="@+id/imageHome"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.777"
+                app:srcCompat="@drawable/ic_record_voice_over_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imageProfile"
+                android:layout_width="67dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                android:contentDescription="@string/text_profile"
+                android:focusable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_person_black_24dp" />
+
+            <ImageView
+                android:id="@+id/imageHome"
+                android:layout_width="69dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:contentDescription="@string/text_home"
+                android:focusable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:srcCompat="@drawable/ic_home_black_24dp" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/text_home"
+                app:layout_constraintEnd_toEndOf="@+id/imageHome"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="@+id/imageHome"
+                app:layout_constraintTop_toTopOf="@+id/imageHome" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="4dp"
+                android:text="@string/text_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageShare"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/imageShare" />
+
+            <TextView
+                android:id="@+id/teste"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:text="@string/text_profile"
+                app:layout_constraintEnd_toEndOf="@+id/imageProfile"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="@+id/imageProfile"
+                app:layout_constraintTop_toTopOf="@+id/imageProfile" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.design.widget.BottomNavigationView>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_main"
-        android:layout_width="411dp"
-        android:layout_height="462dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="66dp"
+        android:layout_marginTop="124dp"
         android:background="@color/colorIce"
+        app:layout_constraintBottom_toTopOf="@+id/navigationView"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
-        tools:layout_editor_absoluteX="0dp"/>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/navegationMenu"
-        android:layout_width="435dp"
-        android:layout_height="66dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/fundo_login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
-
-        <ImageView
-            android:id="@+id/imageShare"
-            android:layout_width="67dp"
-            android:layout_height="59dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            android:contentDescription="@string/text_share"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageProfile"
-            app:layout_constraintHorizontal_bias="0.54"
-            app:layout_constraintStart_toEndOf="@+id/imageHome"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_record_voice_over_black_24dp" />
-
-        <ImageView
-            android:id="@+id/imageProfile"
-            android:layout_width="67dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="36dp"
-            android:layout_marginRight="36dp"
-            android:contentDescription="@string/text_profile"
-            android:focusable="true"
-            android:clickable="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_person_black_24dp" />
-
-        <ImageView
-            android:id="@+id/imageHome"
-            android:layout_width="69dp"
-            android:layout_height="57dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginStart="32dp"
-            android:clickable="true"
-            android:contentDescription="@string/text_home"
-            android:focusable="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_home_black_24dp" />
-
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="44dp"
-            android:text="@string/text_home"
-            app:layout_constraintEnd_toEndOf="@+id/imageHome"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="@+id/imageHome"
-            app:layout_constraintTop_toTopOf="@+id/imageHome" />
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:text="@string/text_share"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageShare"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/imageShare" />
-
-        <TextView
-            android:id="@+id/teste"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="48dp"
-            android:text="@string/text_profile"
-            app:layout_constraintEnd_toEndOf="@+id/imageProfile"
-            app:layout_constraintHorizontal_bias="0.444"
-            app:layout_constraintStart_toStartOf="@+id/imageProfile"
-            app:layout_constraintTop_toTopOf="@+id/imageProfile" />
-    </android.support.constraint.ConstraintLayout>
-
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>

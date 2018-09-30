@@ -24,6 +24,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+/*
+* Classe do perfil "principal". Mostra todos os relatos realizados pelo usuário,
+* assim como as opções de edição do perfil. Usamos uma recyclerView para mostrar
+* os dados (semelhante ao usado no main).
+* Criado por Bruno Bacelar Abe
+* */
 public class MainPerfil extends AppCompatActivity {
 
     private Intent intentProfile;
@@ -60,6 +66,7 @@ public class MainPerfil extends AppCompatActivity {
 
     }
 
+    //Coloca a imagem dentro do profile
     public void putImageToProfile(){
         Utils myUtils = new Utils();
         if(ParseUser.getCurrentUser().getParseFile("imagemPerfil") == null){
@@ -70,6 +77,7 @@ public class MainPerfil extends AppCompatActivity {
         }
     }
 
+    //Ações da barra de navegação
     public void setBarClick(){
         ImageView imageProfile = findViewById(R.id.imageProfile);
         this.intentProfile = new Intent(this, MainPerfil.class);
@@ -107,10 +115,12 @@ public class MainPerfil extends AppCompatActivity {
         });
     }
 
+    //Consulta o banco para pegar algumas informações e chamar o adaptador
     public void getInfoFromParse(){
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Relato");
         final String objectId =  ParseUser.getCurrentUser().getObjectId();
         query.whereEqualTo("idUser", objectId);
+        query.orderByDescending("createdAt");
 
         textShare.setText(ParseUser.getCurrentUser().getUsername());
         userNamePerfil.setText(ParseUser.getCurrentUser().getUsername());
@@ -133,6 +143,7 @@ public class MainPerfil extends AppCompatActivity {
         });
     }
 
+    //Vai para a classe de edição de perfil
     public void editPerfilOnClick(View view) {
         Intent editPerfil = new Intent(this, EditPerfilActivity.class);
         startActivity(editPerfil);

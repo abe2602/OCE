@@ -251,7 +251,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_main"
         android:layout_width="411dp"
-        android:layout_height="435dp"
+        android:layout_height="203dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -259,7 +260,8 @@
         android:background="@color/colorIce"
         app:layout_constraintBottom_toTopOf="@+id/navegationMenu"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subMenuLayout">
 
     </android.support.v7.widget.RecyclerView>
 

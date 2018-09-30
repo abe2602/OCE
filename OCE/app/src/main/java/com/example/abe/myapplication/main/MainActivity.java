@@ -1,6 +1,7 @@
 package com.example.abe.myapplication.main;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -41,7 +42,24 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import static java.lang.Math.sqrt;
+
+/*
+* Classe que representa a tela inicial do app. Para exibir todos os
+* relatos, usamos a estrutura "RecyclerView", uma vez que não há um
+* número fixo de relatos. A RecyclerView contém um adaptador, o qual
+* "linka" os dados em suas posições específicas (esse adaptador tem
+* sua própria classe e é chamado "MainAdapter")
+* Os dados são recuperados do servidor e uma vez recuperados, são passados
+* para o adaptador (respeitando o limite, em km, que começa - por padrão -
+* em 10).
+*
+* Criado por Bruno Bacelar Abe
+* */
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener,  LocationListener{
     private Intent intentProfile;
     private Intent intentShare;
     private Intent intentMain;
@@ -57,16 +75,37 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     private Location location;
     private LocationListener locationListener;
 
-    private double longitude;
-    private double latitude;
+    static private double longitude;
+    static private double latitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        Log.d("aqui","oncreate");
 
-        this.getGPS();
+        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            Log.d("main","gps entrei");
+            if( ParseUser.getCurrentUser().getDouble("Latitude") != 0)
+                latitude = ParseUser.getCurrentUser().getDouble("Latitude");
 
+            if(ParseUser.getCurrentUser().getDouble("Longitude") != 0)
+                longitude = ParseUser.getCurrentUser().getDouble("Longitude");
+
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 0.0f, this);
+
+        //Coloca o menu de opções no main.
+        Log.d("main","toolbar");
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
@@ -91,11 +130,13 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         this.setBarClick();
         this.getInfoFromParse();
 
+        //RecyclerView sendo instanciada
         recyclerView = findViewById(R.id.recycler_view_main);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
     }
 
+    //Lida com os cliques da barra de navegação
     public void setBarClick(){
         ImageView imageProfile;
         ImageView imageMain;
@@ -137,7 +178,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
     }
 
+    //Pega os dados do Banco
     public void getInfoFromParse(){
+        Log.d("aqui","parse");
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Relato");
         final String objectId =  ParseUser.getCurrentUser().getObjectId();
         TextView nameUser = findViewById(R.id.userNameTextView);
@@ -161,9 +204,29 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             public void done(List<ParseObject> objects, ParseException e) {
                 if(e == null){
                     if(objects.size() > 0){
-                        Log.d("User", String.valueOf(objects.size()));
+                        //Filtra os dados antes de colocar na recyclerview, só entra quem estiver no raio
+                        Log.d("longlatmain", String.valueOf(longitude));
+                        if(longitude == 0){
+                            latitude = ParseUser.getCurrentUser().getDouble("Latitude");
+                            longitude = ParseUser.getCurrentUser().getDouble("Longitude");
+                        }
 
-                        mainAdapter = new MainAdapter(objects.size(), objects, longitude, latitude);
+                        List<ParseObject> objects2 = new ArrayList<>();
+                        double raio = (int)ParseUser.getCurrentUser().getNumber("raioInteresse");
+
+                        for(int i = 0; i < objects.size(); i++){
+                            objects.get(i).getNumber("Longitude").doubleValue();
+                            double dist = findDistanceLat(objects.get(i).getNumber("Latitude").doubleValue(),
+                                    objects.get(i).getNumber("Longitude").doubleValue() , latitude, longitude);
+
+                            Log.d("raioDist", String.valueOf(dist));
+
+                            if(dist < raio){
+                                objects2.add(objects.get(i));
+                            }
+                        }
+
+                        mainAdapter = new MainAdapter(objects2.size(), objects2, longitude, latitude);
                         recyclerView.setAdapter(mainAdapter);
                     }
                 }
@@ -171,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         });
     }
 
+    //Usado no filtro
     public void deleteData(){
         List< ParseObject> nomeDoArrayList = new ArrayList<>();
         nomeDoArrayList.clear();
@@ -179,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         recyclerView.setAdapter(myAdapter);
     }
 
+    //Usado no filtro
     public void updateParse(String tipoRelato){
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Relato");
 
@@ -191,9 +256,22 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             public void done(List<ParseObject> objects, ParseException e) {
                 if(e == null){
                     if(objects.size() > 0){
-                        Log.d("User", String.valueOf(objects.size()));
+                      //  Log.d("User", String.valueOf(objects.size()));
+                        Log.d("longlatmain", String.valueOf(longitude));
+                        List<ParseObject> objects2 = new ArrayList<>();
+                        double raio = (int)ParseUser.getCurrentUser().getNumber("raioInteresse");
 
-                        mainAdapter = new MainAdapter(objects.size(), objects, longitude, latitude);
+                        for(int i = 0; i < objects.size(); i++){
+                            objects.get(i).getNumber("Longitude").doubleValue();
+                            double dist = findDistanceLat(objects.get(i).getNumber("Latitude").doubleValue(),
+                                    objects.get(i).getNumber("Longitude").doubleValue() , latitude, longitude);
+
+                            if(dist < raio){
+                                objects2.add(objects.get(i));
+                            }
+                        }
+
+                        mainAdapter = new MainAdapter(objects2.size(), objects2, longitude, latitude);
                         recyclerView.setAdapter(mainAdapter);
                     }
                 }
@@ -201,6 +279,23 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         });
     }
 
+    //Traduz a distancia entre duas longitudes e latitudes para km
+    private double findDistanceLat(double lat_inicial, double long_inicial, double lat_final, double long_final){
+        double d2r = 0.017453292519943295769236;
+        double dlong = (long_final - long_inicial) * d2r;
+        double dlat = (lat_final - lat_inicial) * d2r;
+
+        double temp_sin = sin(dlat/2.0);
+        double temp_cos = cos(lat_inicial * d2r);
+        double temp_sin2 = sin(dlong/2.0);
+
+        double a = (temp_sin * temp_sin) + (temp_cos * temp_cos) * (temp_sin2 * temp_sin2);
+        double c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
+
+        return 6368.1 * c;
+    }
+
+    //Função dos filtros
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         deleteData();
@@ -240,61 +335,36 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         return true;
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        longitude = location.getLongitude();
+        latitude = location.getLatitude();
 
-    public void startGPS(){
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
-                                Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.INTERNET}
-                        , 10);
-            }
-            return;
+        //Guarda a última posição válida no banco
+        if(longitude != 0 && latitude != 0){
+            ParseUser.getCurrentUser().put("Latitude", latitude);
+            ParseUser.getCurrentUser().put("Longitude", longitude);
+            ParseUser.getCurrentUser().saveInBackground();
+        }else{
+            latitude = ParseUser.getCurrentUser().getDouble("Latitude");
+            longitude = ParseUser.getCurrentUser().getDouble("Longitude");
         }
 
-        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
+        Log.d("pegueiMain", String.valueOf(longitude));
     }
 
-    public void getGPS(){
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                Log.d("longlatC", String.valueOf(location.getLongitude()));
-                Log.d("longlatC", String.valueOf(location.getLatitude()));
-
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
-                //searchAdrress(location.getLongitude(), location.getLatitude());
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-                Log.d("longlat", String.valueOf(location.getLongitude()));
-                Log.d("longlat", String.valueOf(location.getLatitude()));
-
-                longitude = location.getLongitude();
-                latitude = location.getLatitude();
-
-                // searchAdrress(location.getLongitude(), location.getLatitude());
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-                Intent i = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(i);
-            }
-        };
-
-        startGPS();
     }
 
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 }

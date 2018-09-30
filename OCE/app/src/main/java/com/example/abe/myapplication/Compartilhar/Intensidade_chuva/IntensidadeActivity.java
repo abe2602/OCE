@@ -19,10 +19,23 @@ import com.example.abe.myapplication.compartilhar.MainCompartilhamento;
 import com.example.abe.myapplication.main.MainActivity;
 import com.example.abe.myapplication.perfil.MainPerfil;
 import com.example.abe.myapplication.R;
+import com.parse.FunctionCallback;
+import com.parse.ParseCloud;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+/*
+ * Classe de compartilhamento referente a intensidade da chuva
+ * A Latitude e longitude são postos no relato para que possamos aplicar os filtros
+ * propostos, assim como recuperar o nome da rua.
+ * Criado por Bruno Bacelar Abe
+ * */
 
 public class IntensidadeActivity extends AppCompatActivity {
     private Intent intentProfile;
@@ -38,6 +51,8 @@ public class IntensidadeActivity extends AppCompatActivity {
     private double longitude;
     private double latitude;
 
+    private HashMap<String, String> functionParameters;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +62,7 @@ public class IntensidadeActivity extends AppCompatActivity {
         this.getGPS();
     }
 
+    //Ações da barra de navegação
     public void setBarClick(){
         ImageView imageProfile = findViewById(R.id.imageProfile);
         this.intentProfile = new Intent(this, MainPerfil.class);
@@ -84,7 +100,14 @@ public class IntensidadeActivity extends AppCompatActivity {
         });
     }
 
+    //Envia o relato
     public void sendRelato(String categoria, String tipo){
+
+        if(latitude == 0 && longitude == 0){
+            longitude = ParseUser.getCurrentUser().getDouble("Longitude");
+            latitude = ParseUser.getCurrentUser().getDouble("Latitude");
+        }
+
         ParseObject relato = new ParseObject("Relato");
         relato.put("idUser", ParseUser.getCurrentUser().getObjectId());
         relato.put("userName", ParseUser.getCurrentUser().getUsername());
@@ -92,6 +115,12 @@ public class IntensidadeActivity extends AppCompatActivity {
         relato.put("Categoria", categoria);
         relato.put("Latitude", latitude);
         relato.put("Longitude", longitude);
+        relato.put("Likes", 0);
+        relato.put("Dislikes", 0);
+
+        List<String> taps = new ArrayList<>();
+        taps.add("nada");
+        relato.put("RelatoRating", taps);
 
         relato.saveInBackground(new SaveCallback() {
             @Override
@@ -133,6 +162,7 @@ public class IntensidadeActivity extends AppCompatActivity {
         this.sendRelato("Chuva fraca sem ventos", this.tipo);
     }
 
+    //Inicia o GPS
     public void startGPS(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -145,9 +175,10 @@ public class IntensidadeActivity extends AppCompatActivity {
             return;
         }
 
-        locationManager.requestLocationUpdates("gps", 50, 0, locationListener);
+        locationManager.requestLocationUpdates("gps", 100, 0, locationListener);
     }
 
+    //Auxilia do GPS
     public void getGPS(){
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 

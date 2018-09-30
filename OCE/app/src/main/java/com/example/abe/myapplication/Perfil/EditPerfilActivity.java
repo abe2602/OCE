@@ -3,7 +3,6 @@ package com.example.abe.myapplication.perfil;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -20,21 +19,22 @@ import com.example.abe.myapplication.main.MainActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseObject;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+/*
+* Classe "principal" da edição do perfil. Basicamente, criados uma recyclerView onde
+* cada uma das posições da mesma possui um layout diferente, uma vez que há várias
+* opções diferentes para edição.
+* Criado por Bruno Bacelar Abe
+* */
 public class EditPerfilActivity extends AppCompatActivity implements OnMapReadyCallback {
     private Intent intentProfile;
     private Intent intentShare;
@@ -63,6 +63,7 @@ public class EditPerfilActivity extends AppCompatActivity implements OnMapReadyC
 
     }
 
+    //Ações da barra de tarefas
     public void setBarClick(){
 
         ImageView imageProfile = findViewById(R.id.imageProfile);
@@ -120,13 +121,12 @@ public class EditPerfilActivity extends AppCompatActivity implements OnMapReadyC
                         @Override
                         public void done(ParseException e) {
                             if(e == null){
-                                Log.d("nullhue", "deu bom");
+                                Log.d("getImage", "sucesso");
                             }else{
-                                Log.d("nullhue", "nahh");
+                                Log.d("getImage", "falha");
                             }
                         }
                     });
-                    //recyclerView.notify();
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -139,7 +139,6 @@ public class EditPerfilActivity extends AppCompatActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
         // Add a marker in Sydney and move the camera
         LatLng pira = new LatLng(-22.768682,  -47.589951);
         mMap.addMarker(new MarkerOptions().position(pira).title("Marker in Piracicaba"));

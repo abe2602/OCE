@@ -3,41 +3,32 @@ package com.example.abe.myapplication.perfil;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
-import android.os.Build;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
 import com.example.abe.myapplication.R;
 import com.example.abe.myapplication.utils.Utils;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-
+/*
+* Adaptador do editar perfil, faremos o bind de cada posição
+* da recyclerView com um layout diferente.
+* Criado por Bruno Bacelar Abe
+* */
 
 /*A ideia aqui é, em cada posição da recyclerView, usar um novo layout*/
 public class EditPerfilAdapter extends  RecyclerView.Adapter<EditPerfilAdapter.EditPerfilViewHolder>{
@@ -52,6 +43,10 @@ public class EditPerfilAdapter extends  RecyclerView.Adapter<EditPerfilAdapter.E
         this.items = items;
     }
 
+    /*
+    * Como há vários tipos de layouts que devem ser empregados no recylerView, usamos o switch Case
+    * e mudamos o que deve ser colocado na view a partir do número correspondente
+    * */
     @NonNull
     @Override
     public EditPerfilViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -61,39 +56,39 @@ public class EditPerfilAdapter extends  RecyclerView.Adapter<EditPerfilAdapter.E
         int layoutId;
         View view;
 
-        switch (viewType) { //arrumar os layouts
+        switch (viewType) {
             case 0:
-                layoutId = R.layout.edit_profile_photo; //Mudar aqui
+                layoutId = R.layout.edit_profile_photo;
                 inflater = LayoutInflater.from(context);
                 view = inflater.inflate(layoutId, parent, false);
                 viewHolder = new EditPerfilAdapter.EditPerfilViewHolder(view);
                 break;
             case 1:
-                layoutId = R.layout.edit_profile_name; //Mudar aqui
+                layoutId = R.layout.edit_profile_name;
                 inflater = LayoutInflater.from(context);
                 view = inflater.inflate(layoutId, parent, false);
                 viewHolder = new EditPerfilAdapter.EditPerfilViewHolder(view);
                 break;
             case 2:
-                layoutId = R.layout.edit_profile_gps; //Mudar aqui
+                layoutId = R.layout.edit_profile_gps;
                 inflater = LayoutInflater.from(context);
                 view = inflater.inflate(layoutId, parent, false);
                 viewHolder = new EditPerfilAdapter.EditPerfilViewHolder(view);
                 break;
             case 3:
-                layoutId = R.layout.edit_profile_range; //Mudar aqui
+                layoutId = R.layout.edit_profile_range;
                 inflater = LayoutInflater.from(context);
                 view = inflater.inflate(layoutId, parent, false);
                 viewHolder = new EditPerfilAdapter.EditPerfilViewHolder(view);
                 break;
             case 4:
-                layoutId = R.layout.edit_profile_map; //Mudar aqui
+                layoutId = R.layout.edit_profile_map;
                 inflater = LayoutInflater.from(context);
                 view = inflater.inflate(layoutId, parent, false);
                 viewHolder = new EditPerfilAdapter.EditPerfilViewHolder(view);
                 break;
             default:
-                layoutId = R.layout.edit_profile_empty; //Mudar aqui
+                layoutId = R.layout.edit_profile_empty;
                 inflater = LayoutInflater.from(context);
                 view = inflater.inflate(layoutId, parent, false);
                 viewHolder = new EditPerfilAdapter.EditPerfilViewHolder(view);

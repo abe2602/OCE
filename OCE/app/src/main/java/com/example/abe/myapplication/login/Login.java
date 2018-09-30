@@ -20,8 +20,14 @@ import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
+import java.util.LinkedList;
+/*
+* Classe de Login.
+* Todos os métodos referentes ao login da aplicação estão aqui.
+*
+* Criado por Bruno Bacelar Abe
+* */
 public class Login extends AppCompatActivity {
-
     private Button cadastro;
     private EditText user, senha;
     private Intent intent;
@@ -33,11 +39,19 @@ public class Login extends AppCompatActivity {
 
         /*Inicialização do Parse, para que possamos usa-lo*/
         Parse.initialize(this);
-        ParseInstallation.getCurrentInstallation().saveInBackground();
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("GCMSenderId", "790690493164"); //Configuração para mandar notificações
 
-        user = (EditText) findViewById(R.id.editTextLogin);
-        senha = (EditText) findViewById(R.id.editTextPassword);
-        cadastro = (Button) findViewById(R.id.buttonCadastrar);
+        // Configuração para criar o canal o qual as notificações acontecem
+        LinkedList<String> channels = new LinkedList<String>();
+        channels.push("channelName");
+        installation.put("channels", channels);
+
+        installation.saveInBackground();
+
+        user = findViewById(R.id.editTextLogin);
+        senha = findViewById(R.id.editTextPassword);
+        cadastro = findViewById(R.id.buttonCadastrar);
 
         /*Resgata o texto salvo via SharedPreferences!!*/
         SharedPreferences preferences = getSharedPreferences("name_shared_preferences", MODE_PRIVATE);
@@ -48,12 +62,6 @@ public class Login extends AppCompatActivity {
             putText = preferences.getString("password", "");
             senha.setText(putText);
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-   //     finish();
     }
 
     public void signInFacebook(View view) {
@@ -118,7 +126,6 @@ public class Login extends AppCompatActivity {
         AlertDialog ok = builder.create();
         ok.show();
     }
-
 }
 
 

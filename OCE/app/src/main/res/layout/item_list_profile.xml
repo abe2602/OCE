@@ -45,8 +45,18 @@
     <TextView
         android:id="@+id/text_vazio"
         android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/colorIce"
+        android:text="@string/vazio"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/text_vazio2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="6dp"
         android:background="@color/colorIce"
         android:text="@string/vazio"
         app:layout_constraintTop_toBottomOf="@+id/text_relato"
@@ -75,5 +85,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/default_icon" />
+
+    <ImageView
+        android:id="@+id/imageLike"
+        android:layout_width="117dp"
+        android:layout_height="32dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_vazio2"
+        app:srcCompat="@drawable/like" />
+
+    <ImageView
+        android:id="@+id/imageDislike"
+        android:layout_width="118dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginRight="44dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_vazio2"
+        app:srcCompat="@drawable/dislike" />
 
 </android.support.constraint.ConstraintLayout>
