@@ -46,10 +46,19 @@ public class cadastroActivity extends AppCompatActivity {
         passwordAgainView =  findViewById(R.id.passwordAgain);
         telephoneView = findViewById(R.id.telephoneEditText);
         cityView = findViewById(R.id.cityEditText);
-
+        final Intent intent = new Intent(this, Login.class);
         /*
         * Função do botão
         * */
+        final Button cancel_button = findViewById(R.id.button_cancel2);
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
         final Button signup_button = findViewById(R.id.button_save2);
         signup_button.setOnClickListener(new View.OnClickListener() {
             @Override

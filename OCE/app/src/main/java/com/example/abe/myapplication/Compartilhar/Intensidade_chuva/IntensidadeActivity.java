@@ -162,7 +162,6 @@ public class IntensidadeActivity extends AppCompatActivity {
         this.sendRelato("Chuva fraca sem ventos", this.tipo);
     }
 
-    //Inicia o GPS
     public void startGPS(){
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
@@ -175,10 +174,9 @@ public class IntensidadeActivity extends AppCompatActivity {
             return;
         }
 
-        locationManager.requestLocationUpdates("gps", 100, 0, locationListener);
+        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
     }
 
-    //Auxilia do GPS
     public void getGPS(){
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 

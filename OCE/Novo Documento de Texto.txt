@@ -1,7 +1,0 @@
-perfil
- - digite o endereço vira endereço
- - dentro da caixa: digite o endereço
-
-Confirmação
- - padrão do print da Lívia
- - Palavras em caixa alta

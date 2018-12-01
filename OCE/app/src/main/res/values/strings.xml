@@ -3,8 +3,8 @@
 
     <string name="back4app_server_url">https://parseapi.back4app.com/</string>
     <!-- Change the following strings as required -->
-    <string name="back4app_app_id">XsIozCVgAyFkHxYfAgfPHmqvsos52GVnzjohIvTO</string>
-    <string name="back4app_client_key">CAJQNowXCQUiEIrZjKhvzzGAPl44EyUOLgo8YRwP</string>
+    <string name="back4app_app_id">53XxOlRWblT33sVh31bGcJoDYoCUXi5vOPw7zzQm</string>
+    <string name="back4app_client_key">zzKArxmanzY6Cp5pQaMIxqXb6moK2VdeMV0fBpbH</string>
 
     <string name="button_google">Entrar com o Gmail</string>
     <string name="button_sign_in">Entrar</string>

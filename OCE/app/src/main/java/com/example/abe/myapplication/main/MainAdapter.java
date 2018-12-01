@@ -294,13 +294,12 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
                    }else {
                        Log.d("searchAdrress", "Não encontrado");
-                       return " ";
+                       return "la";
                    }
                } catch (IOException e) {
                    e.printStackTrace();
                }
-
-               return singleAdress.getThoroughfare();
+              return singleAdress.getThoroughfare();
            }
            return "temp";
         }

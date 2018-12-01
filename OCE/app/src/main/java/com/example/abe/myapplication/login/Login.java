@@ -64,11 +64,14 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    /*
+    TODO
+    Implementar o login com Facebook e Gmail
     public void signInFacebook(View view) {
     }
 
     public void signInGmail(View view) {
-    }
+    } */
 
     public void signIn(View view) {
         SharedPreferences preferences = getSharedPreferences("name_shared_preferences", MODE_PRIVATE);
